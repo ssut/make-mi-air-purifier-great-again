@@ -1,0 +1,22 @@
+{
+  "name": "make-mi-air-purifier-great-again",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssut/make-mi-air-purifier-great-again.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ssut/make-mi-air-purifier-great-again/issues"
+  },
+  "homepage": "https://github.com/ssut/make-mi-air-purifier-great-again#readme",
+  "dependencies": {
+    "miio": "^0.15.6"
+  }
+}

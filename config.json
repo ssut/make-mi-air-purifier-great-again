@@ -1,0 +1,31 @@
+{
+    "modes": {
+        "great": {
+                "LED": {
+                    "default": true,
+                    "conditions": [
+                        {
+                            "action": false,
+                            "times": "0100-0700"
+                        }
+                    ]
+                },
+                "Fan": {
+                    "default": "auto",
+                    "conditions": [
+                        { "action": "sleep", "aqi": "< 10" },
+                        { "action": "favorite", "level": 5, "aqi": ">= 15" },
+                        { "action": "favorite", "level": 6, "aqi": ">= 20" },
+                        { "action": "favorite", "level": 8, "aqi": ">= 30" },
+                        { "action": "favorite", "level": 10, "aqi": ">= 50" }
+                    ]
+                }
+            }
+    },
+    "devices": {
+        "bedroom": {
+            "ip": "192.168.1.87",
+            "mode": "great"
+        }
+    }
+}
