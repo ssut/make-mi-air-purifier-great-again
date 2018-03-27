@@ -1,3 +1,5 @@
+// TODO: separate all classes
+
 const sleep = require('sleep-promise');
 const { DateTime } = require('luxon');
 
@@ -81,6 +83,9 @@ class Mode {
 
   async loop() {
     const { actions, defaults, dependents } = this;
+    const form = dependents
+      .filter(item => Device.CHANGABLES.includes(item))
+      .reduce((previous, current) => ({ ...previous, [current]: null }), {});
 
     for (;;) {
       // better ideas?
@@ -95,9 +100,6 @@ class Mode {
       })));
 
       // try to match
-      const form = dependents
-        .filter(item => Device.CHANGABLES.includes(item))
-        .reduce((previous, current) => ({ ...previous, [current]: null }), {});
       for (const info of devices) {
         const { device, data } = info;
         const changes = { ...form };
@@ -131,6 +133,8 @@ class Mode {
             promises.push(device.update(feature, ...next));
           }
         }
+
+        await Promise.all(promises);
       }
 
       await sleep(this.interval);
