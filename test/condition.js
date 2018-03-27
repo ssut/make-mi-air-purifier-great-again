@@ -29,10 +29,10 @@ describe('Condition', () => {
     });
 
     it('should work with simple condition when proper condition is present', () => {
-      assert.equal(new Condition('simple', '> 0').test(5), true);
-      assert.equal(new Condition('simple', '> 0').test(0), false);
-      assert.equal(new Condition('simple', '<= 5').test(5), true);
-      assert.equal(new Condition('simple', '<= 5').test(6), false);
+      assert.equal(new Condition('simple', '> 0', 'val').test({ val: 5 }), true);
+      assert.equal(new Condition('simple', '> 0', 'val').test({ val: 0 }), false);
+      assert.equal(new Condition('simple', '<= 5', 'val').test({ val: 1 }), true);
+      assert.equal(new Condition('simple', '<= 5', 'val').test({ val: 6 }), false);
     });
 
     it('should work with time condition when proper condition is present', () => {
@@ -40,7 +40,7 @@ describe('Condition', () => {
       const future = now.plus({ hours: 1 });
       const arg = `${now.toFormat('HHmm')}-${future.toFormat('HHmm')}`;
 
-      assert.equal(new Condition('time', arg).test(now), true);
+      assert.equal(new Condition('time', arg).test({ time: now }), true);
     });
   });
 });

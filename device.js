@@ -145,7 +145,7 @@ class Device extends EventEmitter {
 
     if (fn !== undefined) {
       // pass with favorite levels because of slow updates
-      if (args[0] === 'favorite' && this.stats.mode !== 'favorite') {
+      if (feature !== 'mode' || feature === 'mode' && args[0] === 'favorite' && this.stats.mode !== 'favorite') {
         console.info(String(new Date), 'updating', feature, 'to', ...args);
       }
       await fn.bind(this)(...args);
@@ -153,7 +153,7 @@ class Device extends EventEmitter {
   }
 
   async setPower(on) {
-    this.ref.setPower(on);
+    await this.ref.setPower(on);
     this.stats.power = on;
 
     return true;

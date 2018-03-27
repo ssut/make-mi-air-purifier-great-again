@@ -77,7 +77,7 @@ class TimeRangeCondition extends ConditionChecker {
 
     const { from, to } = this;
     const target = Number(arg.time.toFormat('HHmm'));
-    return (from <= to) ? from <= target && target <= to : from <= target && to <= target;
+    return (from <= to) ? from <= target && target <= to : (from <= target && to <= target) || (target <= to && target <= from);
   }
 
 }
