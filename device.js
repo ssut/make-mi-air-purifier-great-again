@@ -57,6 +57,30 @@ class Device extends EventEmitter {
     return this.ref.humidity();
   }
 
+  async setPower(on) {
+    return this.ref.setPower(on);
+  }
+
+  async setMode(mode = 'auto', level = null) {
+    if (!['auto', 'silent', 'favorite'].includes(mode)) {
+      throw new Error(`mode ${mode} is not supported`);
+    }
+    if (level !== null && (level < 0 || level > 16)) {
+      throw new Error(`level must be range from 1 to 16`);
+    }
+
+    await this.ref.setMode(mode);
+    if (level !== null) {
+      await this.ref.setFavoriteLevel(level);
+    }
+
+    return true;
+  }
+
+  async setLED(enabled) {
+    return this.ref.led(enabled);
+  }
+
 }
 
 module.exports = Device;
