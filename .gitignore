@@ -71,4 +71,8 @@ typings/
 .history
 
 
+# project related
+config.json
+
+
 # End of https://www.gitignore.io/api/node,visualstudiocode

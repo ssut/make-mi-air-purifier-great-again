@@ -11,11 +11,13 @@ const main = async () => {
   }
   await Promise.all(purifiers.map(purifier => purifier.connect()));
 
+  // mode can have multiple devices
   modes.forEach(mode => {
-    const devices = purifiers.filter(p => p.mode === mode.name);
+    const devices = purifiers.filter(p => p.modeName === mode.name);
     mode.addDevices(...devices);
   });
 
+  await Promise.all(modes.map(mode => mode.loop()));
 };
 
 main()

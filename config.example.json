@@ -1,7 +1,7 @@
 {
     "modes": {
         "great": {
-                "interval": 5000,
+                "interval": 10000,
                 "power": {
                     "default": true,
                     "conditions": [
@@ -29,7 +29,7 @@
     },
     "devices": {
         "bedroom": {
-            "ip": "192.168.1.87",
+            "ip": "YOUR MI AIR PURIFIER IP HERE (EX - 192.168.0.2)",
             "mode": "great"
         }
     }
