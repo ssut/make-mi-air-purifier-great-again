@@ -3,7 +3,7 @@ const { DateTime } = require('luxon');
 
 const Condition = require('./condition');
 const Device = require('./device');
-const config = require('./config.json');
+const config = require(`${process.cwd()}/config.json`);
 
 class Mode {
 
@@ -57,7 +57,7 @@ class Mode {
 
         const { action, conditions } = this.features[feature];
         const conds = conditions
-          .map(({ action, ...cond }) => ({ testers: Condition.fromConfig(cond), feature, action }));
+          .map(cond => ({ action: cond.action, testers: Condition.fromConfig(cond), feature }));
         acts.push({
           feature,
           action,
