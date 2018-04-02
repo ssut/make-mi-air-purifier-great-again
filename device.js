@@ -68,17 +68,17 @@ class Device extends EventEmitter {
     if (features.includes('humidity')) {
       this.polls.add('humidity');
     }
-    if (features.includes('power')) {
-      this.ref.on('power', power => {
-        this.stats.power = power;
-      });
-      this.stats.power = await this.ref.power();
-    }
     if (features.includes('led')) {
       this.polls.add('led');
     }
 
     if (this.isPolling === false) {
+      // power = default
+      this.ref.on('power', power => {
+        this.stats.power = power;
+      });
+      this.stats.power = await this.ref.power();
+
       this.poll().then();
     }
 
