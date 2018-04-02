@@ -20,5 +20,16 @@ const main = async () => {
   await Promise.all(modes.map(mode => mode.loop()));
 };
 
-main()
+const loop = async () => {
+  for (;;) {
+    try {
+      await main();
+    } catch (e) {
+      console.error('unexpected error:', e);
+    }
+    console.log('restarting..');
+  }
+};
+
+loop()
   .catch(e => console.error(e));
