@@ -1,4 +1,8 @@
 {
+    "discover": {
+        "enabled": true,
+        "mode": "great"
+    },
     "modes": {
         "great": {
                 "interval": 10000,
