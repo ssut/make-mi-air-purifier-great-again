@@ -148,6 +148,7 @@ class Config {
 
   constructor(config) {
     this.devices = config.devices;
+    this.discover = config.discover;
     this.modes = Object.keys(config.modes).reduce((modes, current) => {
       const mode = new Mode(current, config.modes[current]);
       modes.push(mode);

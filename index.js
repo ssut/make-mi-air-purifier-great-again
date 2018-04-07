@@ -1,11 +1,30 @@
+const miio = require('miio');
+
 const Device = require('./device');
 const config = require('./config');
 
 const purifiers = [];
 
 const main = async () => {
-  const { devices, modes } = config;
+  const { discover, devices, modes } = config;
+  // collect only IP addresses (to be used in auto discovering)
+  const deviceIPs = Object.values(devices).map(device => device.ip);
 
+  // TODO: separate codes
+  if (discover.enabled === true && discover.mode !== '') {
+    const browser = miio.browse();
+    browser.on('available', reg => {
+      const { address, token, model, hostname } = reg;
+      if (address && token && model.includes('airpurifier') && !deviceIPs.includes(address)) {
+        const device = new Device(hostname, address, discover.mode);
+        device.connect()
+          .then(() => modes.find(mode => mode.name === discover.mode).addDevices(device))
+          .then(() => console.info(String(new Date), `Device added: ${address} (mode: ${discover.mode})`));
+      }
+    });
+  }
+
+  // TODO: use proxy to observe object changes
   for (const [ name, args ] of Object.entries(devices)) {
     purifiers.push(new Device(name, args.ip, args.mode));
   }
