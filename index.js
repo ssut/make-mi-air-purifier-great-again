@@ -15,7 +15,7 @@ const main = async () => {
     const browser = miio.browse();
     browser.on('available', reg => {
       const { address, token, model, hostname } = reg;
-      if (address && token && model.includes('airpurifier') && !deviceIPs.includes(address)) {
+      if (address && token && model && model.includes('airpurifier') && !deviceIPs.includes(address)) {
         const device = new Device(hostname, address, discover.mode);
         device.connect()
           .then(() => modes.find(mode => mode.name === discover.mode).addDevices(device))
